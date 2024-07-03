@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import millify from "millify";
 import { GoArrowDownRight, GoArrowUpRight } from "react-icons/go";
+import { Sparklines, SparklinesLine } from "react-sparklines";
 
 const Home: React.FC = () => {
   const [assets, setAssets] = useState<any[]>([]);
@@ -49,6 +51,9 @@ const Home: React.FC = () => {
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               24h Change
             </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              24h Chart
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -77,40 +82,46 @@ const Home: React.FC = () => {
                 <span className="text-gray-400 text-xs ml-1">/USDT</span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className="text-lg">{`${asset.market_cap.toLocaleString()}`}</span>
+                <span className="text-lg">{millify(asset.market_cap)}</span>
                 <span className="text-gray-400 text-xs ml-1">/USDT</span>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap flex items-center">
-                {asset.price_change_percentage_24h > 0 ? (
-                  <span className="text-green-500 mr-1">
-                    <GoArrowUpRight />
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="flex items-center">
+                  {asset.price_change_percentage_24h > 0 ? (
+                    <span className="text-green-500 mr-1">
+                      <GoArrowUpRight />
+                    </span>
+                  ) : (
+                    <span className="text-red-500 mr-1">
+                      <GoArrowDownRight />
+                    </span>
+                  )}
+                  <span
+                    className={`${
+                      asset.price_change_percentage_24h > 0
+                        ? "text-green-500"
+                        : asset.price_change_percentage_24h < 0
+                        ? "text-red-500"
+                        : "text-black"
+                    } text-lg`}
+                  >
+                    {Math.abs(asset.price_change_percentage_24h).toFixed(2)}%
                   </span>
-                ) : (
-                  <span className="text-red-500 mr-1">
-                    <GoArrowDownRight />
-                  </span>
-                )}
-                <span
-                  className={`${
-                    asset.price_change_percentage_24h > 0
-                      ? "text-green-500"
-                      : asset.price_change_percentage_24h < 0
-                      ? "text-red-500"
-                      : "text-black"
-                  } text-lg`}
-                >
-                  {Math.abs(asset.price_change_percentage_24h).toFixed(2)}%
-                </span>
+                </div>
               </td>
-              <td
-                className={`px-6 py-4 whitespace-nowrap ${
-                  asset.priceChangePercent > 0
-                    ? "text-green-500"
-                    : "text-red-500"
-                }`}
-              >
-                ++
-                {/* Implement sparkline chart */}
+              <td className="px-6 py-4 whitespace-nowrap">
+                <Sparklines
+                  data={[asset.price_change_percentage_24h]}
+                  width={100}
+                  height={30}
+                  margin={5}
+                >
+                  <SparklinesLine
+                    color={
+                      asset.price_change_percentage_24h > 0 ? "green" : "red"
+                    }
+                  />
+                </Sparklines>
               </td>
             </tr>
           ))}
