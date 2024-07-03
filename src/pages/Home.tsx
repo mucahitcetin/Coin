@@ -111,7 +111,7 @@ const Home: React.FC = () => {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <Sparklines
-                  data={[asset.price_change_percentage_24h]}
+                  data={[asset.low_24h, asset.high_24h, asset.current_price]}
                   width={100}
                   height={30}
                   margin={5}
