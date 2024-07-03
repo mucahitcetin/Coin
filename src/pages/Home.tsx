@@ -56,21 +56,28 @@ const Home: React.FC = () => {
             <tr key={asset.id}>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
-                  <img
-                    src={asset.image}
-                    alt={`${asset.name} icon`}
-                    className="w-6 h-6 mr-2"
-                  />
-                  <span>{`${asset.symbol.toUpperCase()}`}</span>
-                  <span className="text-gray-400 text-xs ml-1">/USDT</span>
+                  <div className="flex items-center">
+                    <img
+                      src={asset.image}
+                      alt={`${asset.name} icon`}
+                      className="w-10 h-10 mr-2 text-lg"
+                    />
+                    <div className="flex-col">
+                      <span className="text-lg">{`${asset.symbol.toUpperCase()}`}</span>
+                      <span className="text-gray-400 text-lg ml-1">/USDT</span>
+                      <div className="text-gray-500 text-lg mt-1">
+                        {`${asset.id.toUpperCase()}`}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className="text-sm">{`${asset.current_price}`}</span>
+                <span className="text-lg">{`${asset.current_price}`}</span>
                 <span className="text-gray-400 text-xs ml-1">/USDT</span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className="text-sm">{`${asset.market_cap.toLocaleString()}`}</span>
+                <span className="text-lg">{`${asset.market_cap.toLocaleString()}`}</span>
                 <span className="text-gray-400 text-xs ml-1">/USDT</span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap flex items-center">
@@ -90,7 +97,7 @@ const Home: React.FC = () => {
                       : asset.price_change_percentage_24h < 0
                       ? "text-red-500"
                       : "text-black"
-                  } text-sm`}
+                  } text-lg`}
                 >
                   {Math.abs(asset.price_change_percentage_24h).toFixed(2)}%
                 </span>
