@@ -95,6 +95,16 @@ const Home: React.FC = () => {
                   {Math.abs(asset.price_change_percentage_24h).toFixed(2)}%
                 </span>
               </td>
+              <td
+                className={`px-6 py-4 whitespace-nowrap ${
+                  asset.priceChangePercent > 0
+                    ? "text-green-500"
+                    : "text-red-500"
+                }`}
+              >
+                ++
+                {/* Implement sparkline chart */}
+              </td>
             </tr>
           ))}
         </tbody>
