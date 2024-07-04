@@ -12,14 +12,14 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   return (
     <ReactPaginate
-      previousLabel={"←"}
-      nextLabel={"→"}
+      previousLabel={"<"}
+      nextLabel={">"}
       breakLabel={"..."}
       pageCount={pageCount}
       marginPagesDisplayed={2}
       pageRangeDisplayed={5}
       onPageChange={handlePageClick}
-      containerClassName={"pagination"}
+      containerClassName={"pagination justify-center mt-4"}
       pageClassName={"page-item"}
       pageLinkClassName={"page-link"}
       previousClassName={"page-item"}

@@ -74,7 +74,7 @@ const CryptoTable: React.FC<CryptoTableProps> = ({ assets }) => {
               <span className="text-lg font-semibold">
                 {millify(asset.market_cap)}
               </span>
-              <span className="text-gray-400  text-xs ml-1"> USDT</span>
+              <span className="text-gray-400 text-xs ml-1"> USDT</span>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
               <div className="flex items-center font-semibold">

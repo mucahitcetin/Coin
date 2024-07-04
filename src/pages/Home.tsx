@@ -41,7 +41,7 @@ const Home: React.FC = () => {
     };
 
     fetchAssetData();
-    const interval = setInterval(fetchAssetData, 100000);
+    const interval = setInterval(fetchAssetData, 10000);
 
     return () => clearInterval(interval);
   }, []);
