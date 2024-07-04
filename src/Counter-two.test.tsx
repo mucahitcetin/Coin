@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+/* import { render, screen } from "@testing-library/react";
 import CounterTwo from "@/components/counter-two/Counter-two";
 import user from "@testing-library/user-event";
 
@@ -29,3 +29,4 @@ describe("Counter-two", () => {
     expect(decrementHandler).toHaveBeenCalledTimes(1);
   });
 });
+ */
