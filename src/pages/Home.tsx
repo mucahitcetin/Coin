@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import millify from "millify";
+import ReactPaginate from "react-paginate";
 import { GoArrowDownRight, GoArrowUpRight } from "react-icons/go";
 import { Sparklines, SparklinesLine } from "react-sparklines";
-import ReactPaginate from "react-paginate";
 
 const Home: React.FC = () => {
   const [assets, setAssets] = useState<any[]>([]);
@@ -151,8 +151,8 @@ const Home: React.FC = () => {
         </tbody>
       </table>
       <ReactPaginate
-        previousLabel={"← Previous"}
-        nextLabel={"Next →"}
+        previousLabel={"←"}
+        nextLabel={"→"}
         breakLabel={"..."}
         pageCount={pageCount}
         marginPagesDisplayed={2}
