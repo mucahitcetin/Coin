@@ -29,10 +29,14 @@ const Home: React.FC = () => {
     };
 
     fetchAssetData();
-    const interval = setInterval(fetchAssetData, 10000);
+    const interval = setInterval(fetchAssetData, 100000);
 
     return () => clearInterval(interval);
   }, []);
+
+  const capitalize = (string: string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  };
 
   return (
     <div className="overflow-x-auto p-8">
@@ -68,31 +72,41 @@ const Home: React.FC = () => {
                       className="w-10 h-10 mr-2 text-lg"
                     />
                     <div className="flex-col">
-                      <span className="text-lg">{`${asset.symbol.toUpperCase()}`}</span>
-                      <span className="text-gray-400 text-lg ml-1">/USDT</span>
+                      <span className="text-lg font-semibold">
+                        {`${asset.symbol.toUpperCase()}`}
+                      </span>
+                      <span className="text-gray-400 text-lg ml-1">/ USDT</span>
                       <div className="text-gray-500 text-lg mt-1">
-                        {`${asset.id.toUpperCase()}`}
+                        {`${capitalize(asset.id)}`}
                       </div>
                     </div>
                   </div>
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className="text-lg">{`${asset.current_price}`}</span>
-                <span className="text-gray-400 text-xs ml-1">/USDT</span>
+                <span className="text-lg font-semibold">{`${asset.current_price}`}</span>
+                <span className="text-gray-400 text-xs ml-1"> USDT</span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className="text-lg">{millify(asset.market_cap)}</span>
-                <span className="text-gray-400 text-xs ml-1">/USDT</span>
+                <span className="text-lg font-semibold">
+                  {millify(asset.market_cap)}
+                </span>
+                <span className="text-gray-400  text-xs ml-1"> USDT</span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex items-center">
+                <div className="flex items-center font-semibold">
                   {asset.price_change_percentage_24h > 0 ? (
-                    <span className="text-green-500 mr-1">
+                    <span
+                      className="text-green-500 mr-1"
+                      style={{ fontSize: "1.5em" }}
+                    >
                       <GoArrowUpRight />
                     </span>
                   ) : (
-                    <span className="text-red-500 mr-1">
+                    <span
+                      className="text-red-500 mr-1"
+                      style={{ fontSize: "1.5em" }}
+                    >
                       <GoArrowDownRight />
                     </span>
                   )}
