@@ -34,10 +34,6 @@ const Home: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const capitalize = (string: string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-  };
-
   return (
     <div className="overflow-x-auto p-8">
       <table className="min-w-full bg-white border border-gray-200">
@@ -77,7 +73,7 @@ const Home: React.FC = () => {
                       </span>
                       <span className="text-gray-400 text-lg ml-1">/ USDT</span>
                       <div className="text-gray-500 text-lg mt-1">
-                        {`${capitalize(asset.id)}`}
+                        {`${asset.name}`}
                       </div>
                     </div>
                   </div>
