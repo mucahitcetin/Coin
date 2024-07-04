@@ -3,9 +3,11 @@ import axios from "axios";
 import millify from "millify";
 import { GoArrowDownRight, GoArrowUpRight } from "react-icons/go";
 import { Sparklines, SparklinesLine } from "react-sparklines";
+import ReactPaginate from "react-paginate";
 
 const Home: React.FC = () => {
   const [assets, setAssets] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
   useEffect(() => {
     const fetchAssetData = async () => {
@@ -16,7 +18,7 @@ const Home: React.FC = () => {
             params: {
               vs_currency: "usd",
               order: "market_cap_desc",
-              per_page: 10,
+              per_page: 100,
               page: 1,
             },
           }
@@ -33,6 +35,15 @@ const Home: React.FC = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const itemsPerPage = 10;
+  const offset = currentPage * itemsPerPage;
+  const currentPageData = assets.slice(offset, offset + itemsPerPage);
+  const pageCount = Math.ceil(assets.length / itemsPerPage);
+
+  const handlePageClick = (event: { selected: number }) => {
+    setCurrentPage(event.selected);
+  };
 
   return (
     <div className="overflow-x-auto p-8">
@@ -57,7 +68,7 @@ const Home: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {assets.map((asset) => (
+          {currentPageData.map((asset) => (
             <tr key={asset.id}>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
@@ -69,18 +80,20 @@ const Home: React.FC = () => {
                     />
                     <div className="flex-col">
                       <span className="text-lg font-semibold">
-                        {`${asset.symbol.toUpperCase()}`}
+                        {asset.symbol.toUpperCase()}
                       </span>
                       <span className="text-gray-400 text-lg ml-1">/ USDT</span>
                       <div className="text-gray-500 text-lg mt-1">
-                        {`${asset.name}`}
+                        {asset.name}
                       </div>
                     </div>
                   </div>
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className="text-lg font-semibold">{`${asset.current_price}`}</span>
+                <span className="text-lg font-semibold">
+                  {asset.current_price}
+                </span>
                 <span className="text-gray-400 text-xs ml-1"> USDT</span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
@@ -137,6 +150,25 @@ const Home: React.FC = () => {
           ))}
         </tbody>
       </table>
+      <ReactPaginate
+        previousLabel={"← Previous"}
+        nextLabel={"Next →"}
+        breakLabel={"..."}
+        pageCount={pageCount}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+        previousClassName={"page-item"}
+        previousLinkClassName={"page-link"}
+        nextClassName={"page-item"}
+        nextLinkClassName={"page-link"}
+        breakClassName={"page-item"}
+        breakLinkClassName={"page-link"}
+        activeClassName={"active"}
+      />
     </div>
   );
 };

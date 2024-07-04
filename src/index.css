@@ -7,3 +7,32 @@
 * {
   font-family: "Inter", sans-serif;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.page-item {
+  list-style: none;
+  margin: 0 0.25rem;
+}
+
+.page-link {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #221d1d;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.page-link:hover {
+  background-color: #f0f0f0;
+}
+
+.active .page-link {
+  background-color: #ddd;
+  color: #221d1d;
+}
