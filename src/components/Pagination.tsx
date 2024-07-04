@@ -21,14 +21,16 @@ const Pagination: React.FC<PaginationProps> = ({
       onPageChange={handlePageClick}
       containerClassName={"pagination justify-center mt-4"}
       pageClassName={"page-item"}
-      pageLinkClassName={"page-link"}
+      pageLinkClassName={"page-link px-2 py-1 border rounded-md text-gray-700"}
       previousClassName={"page-item"}
-      previousLinkClassName={"page-link"}
+      previousLinkClassName={
+        "page-link px-2 py-1 border rounded-md text-gray-700"
+      }
       nextClassName={"page-item"}
-      nextLinkClassName={"page-link"}
+      nextLinkClassName={"page-link px-2 py-1 border rounded-md text-gray-700"}
       breakClassName={"page-item"}
-      breakLinkClassName={"page-link"}
-      activeClassName={"active"}
+      breakLinkClassName={"page-link px-2 py-1 border rounded-md text-gray-700"}
+      activeClassName={"active bg-gray-300"}
     />
   );
 };
